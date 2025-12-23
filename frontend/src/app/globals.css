@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+:root {
+  --lumo-cream: #f2f2f2;
+  --lumo-sand: #e7e7e7;
+  --lumo-ink: #121212;
+  --lumo-ink-soft: #3b3b3b;
+  --lumo-amber: #f2a470;
+  --lumo-accent: #e86b2e;
+}
+
+@theme inline {
+  --color-background: var(--lumo-cream);
+  --color-foreground: var(--lumo-ink);
+  --color-accent: var(--lumo-accent);
+  --color-accent-soft: var(--lumo-amber);
+  --font-sans: var(--font-lumo-sans);
+  --font-display: var(--font-lumo-display);
+}
+
+@layer base {
+  body {
+    background: var(--lumo-cream);
+    color: var(--lumo-ink);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    min-height: 100vh;
+  }
+
+  .font-display {
+    font-family: var(--font-lumo-display), var(--font-sans), system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: rgba(232, 107, 46, 0.2);
+  }
+}

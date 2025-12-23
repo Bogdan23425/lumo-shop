@@ -1,0 +1,14 @@
+{
+  "name": "lumo-backend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node src/index.ts",
+    "lint": "echo \"TODO: add lint\"",
+    "typecheck": "echo \"TODO: add typecheck\""
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
