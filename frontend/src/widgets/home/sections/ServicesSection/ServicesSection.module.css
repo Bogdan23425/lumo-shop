@@ -1,0 +1,64 @@
+.servicesSection {
+}
+
+.servicesContainer {
+  width: 1366px;
+  height: 144px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.serviceColumn {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  padding: 15px 0;
+  box-sizing: border-box;
+  align-items: flex-start;
+}
+
+.serviceIcon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #43B02A;
+  font-size: 20px;
+  line-height: 1;
+  margin-top: 0;
+}
+
+.serviceContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.serviceTitle {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+}
+
+.serviceDescription {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  color: #616161;
+  margin: 0;
+  padding: 0;
+}

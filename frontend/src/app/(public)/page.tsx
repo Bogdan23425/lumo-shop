@@ -1,87 +1,54 @@
-import Link from "next/link";
-import { Container } from "@/shared/ui/Container";
-import { CATEGORIES } from "@/shared/config/categories";
-import { slugify } from "@/shared/lib/slug";
 import { CategoryMenu } from "@/widgets/catalog/CategoryMenu";
-import { HeroSlider } from "@/widgets/home/HeroSlider";
-import { HomeRightSection } from "@/widgets/home/HomeRightSection";
+import {
+  HomeRightSection,
+  ViewedProducts,
+  SimpleProducts,
+  CategoryProducts,
+  VideoReviews,
+  QrCodeSection,
+  ServicesSection,
+  Footer,
+  Categories,
+  Copyright,
+} from "@/widgets/home";
 
-const highlights = [
-  {
-    label: "Доставка",
-    value: "от 1 дня",
-    description: "Экспресс-логистика по стране",
-  },
-  {
-    label: "Гарантия",
-    value: "24 месяца",
-    description: "Официальный сервис и возврат",
-  },
-  {
-    label: "Поддержка",
-    value: "24/7",
-    description: "Консультации и подбор",
-  },
+const simpleProducts = [
+  { id: "sp-1", title: "Смартфон Apple iPhone 16 Pro Max 256GB", oldPrice: 52599, price: 51099 },
+  { id: "sp-2", title: "Смартфон Samsung Galaxy S25 Ultra 512GB", oldPrice: 49999, price: 47999 },
+  { id: "sp-3", title: "Ноутбук MacBook Pro 14 M3 Pro", oldPrice: 89999, price: 84999 },
+  { id: "sp-4", title: "Телевізор Samsung QLED 65", oldPrice: 69999, price: 64999 },
+  { id: "sp-5", title: "Холодильник Samsung Side-by-Side", oldPrice: 79999, price: 74999 },
 ];
 
-const productHits = [
-  {
-    name: "Xenon Pro 14",
-    category: "Ноутбуки",
-    price: "59 990",
-    badge: "Хит продаж",
-  },
-  {
-    name: "Auralink Mini",
-    category: "Аудио",
-    price: "12 490",
-    badge: "Топ в категории",
-  },
-  {
-    name: "Nexa Home Hub",
-    category: "Умный дом",
-    price: "18 990",
-    badge: "Рекомендация",
-  },
+const smartphones = [
+  { id: "sm-1", title: "Смартфон Apple iPhone 16 Pro Max 256GB", oldPrice: 52599, price: 51099 },
+  { id: "sm-2", title: "Смартфон Samsung Galaxy S25 Ultra 512GB", oldPrice: 49999, price: 47999 },
+  { id: "sm-3", title: "Смартфон Xiaomi 14 Ultra 256GB", oldPrice: 39999, price: 37999 },
+  { id: "sm-4", title: "Смартфон Google Pixel 8 Pro 256GB", oldPrice: 44999, price: 42999 },
+  { id: "sm-5", title: "Смартфон OnePlus 12 512GB", oldPrice: 34999, price: 32999 },
 ];
 
-const productNew = [
-  {
-    name: "Vivid Air 2",
-    category: "Смартфоны",
-    price: "29 990",
-    badge: "Новинка",
-  },
-  {
-    name: "Pulse Neo",
-    category: "Смарт-часы",
-    price: "9 990",
-    badge: "Новинка",
-  },
-  {
-    name: "Glow Kitchen",
-    category: "Для кухни",
-    price: "7 890",
-    badge: "Новинка",
-  },
+const fridges = [
+  { id: "fr-1", title: "Холодильник Samsung Side-by-Side 623L", oldPrice: 79999, price: 74999 },
+  { id: "fr-2", title: "Холодильник LG InstaView Door-in-Door", oldPrice: 89999, price: 84999 },
+  { id: "fr-3", title: "Холодильник Bosch Serie 6 NoFrost", oldPrice: 69999, price: 64999 },
+  { id: "fr-4", title: "Холодильник Beko CNK 33520", oldPrice: 49999, price: 44999 },
+  { id: "fr-5", title: "Холодильник Indesit ITR 5200 W", oldPrice: 39999, price: 34999 },
 ];
 
-const promoCards = [
-  {
-    title: "Смарт-аксессуары",
-    description: "Скидки до 25% на гаджеты для дома",
-  },
-  {
-    title: "Игровой weekend",
-    description: "Консоли, геймпады и подписки",
-  },
+const laptops = [
+  { id: "lp-1", title: "Ноутбук MacBook Pro 14 M3 Pro 1TB", oldPrice: 89999, price: 84999 },
+  { id: "lp-2", title: "Ноутбук ASUS ROG Strix G16", oldPrice: 79999, price: 74999 },
+  { id: "lp-3", title: "Ноутбук Lenovo ThinkPad X1 Carbon", oldPrice: 69999, price: 64999 },
+  { id: "lp-4", title: "Ноутбук HP Spectre x360 14", oldPrice: 59999, price: 54999 },
+  { id: "lp-5", title: "Ноутбук Dell XPS 15 OLED", oldPrice: 89999, price: 84999 },
 ];
 
 export default function Home() {
   return (
-    <div className="pb-16">
+    <div>
       <section className="pt-0" style={{ paddingBottom: '10px' }}>
-        <div className="mx-auto w-full max-w-[1400px] px-0" style={{ paddingLeft: '10px' }}>
+        <div className="mx-auto w-full max-w-[1414px] px-0" style={{ paddingLeft: '10px' }}>
           <div className="grid lg:grid-cols-[320px_auto]" style={{ gap: '10px' }}>
             <div className="hidden lg:block" style={{ marginTop: '10px' }}>
               <div className="rounded-lg border border-black/10 bg-white/80" style={{ width: '320px', height: '602px', padding: '0' }}>
@@ -95,141 +62,27 @@ export default function Home() {
         </div>
       </section>
 
-      <section style={{ paddingTop: '10px', paddingBottom: '10px' }}>
-        <Container>
-          <div className="flex items-center justify-between">
-            <h2 className="font-display text-2xl text-slate-900">Быстрые категории</h2>
-            <Link href="/catalog" className="text-sm font-semibold text-slate-600 hover:text-slate-900">
-              Все категории →
-            </Link>
-          </div>
-          <div style={{ marginTop: '10px', gap: '10px' }} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
-            {CATEGORIES.slice(0, 12).map((category) => (
-              <Link
-                key={category}
-                href={`/c/${slugify(category)}`}
-                className="rounded-2xl border border-black/10 bg-white/70 px-4 py-4 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-black/20"
-              >
-                {category}
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </section>
+      <ViewedProducts />
 
-      <section style={{ paddingTop: '10px', paddingBottom: '10px' }}>
-        <Container>
-          <SectionHeader title="Хиты продаж" subtitle="Проверенная техника, которую берут чаще всего" />
-          <div style={{ marginTop: '10px', gap: '10px' }} className="grid md:grid-cols-3">
-            {productHits.map((product) => (
-              <ProductCard key={product.name} {...product} />
-            ))}
-          </div>
-        </Container>
-      </section>
+      <SimpleProducts products={simpleProducts} />
 
-      <section style={{ paddingTop: '10px', paddingBottom: '10px' }}>
-        <Container>
-          <SectionHeader title="Новинки" subtitle="Свежие релизы и лимитированные партии" />
-          <div style={{ marginTop: '10px', gap: '10px' }} className="grid md:grid-cols-3">
-            {productNew.map((product) => (
-              <ProductCard key={product.name} {...product} />
-            ))}
-          </div>
-        </Container>
-      </section>
+      <CategoryProducts title="Смартфоны" products={smartphones} cardWidth={272} cardHeight={516} showPlaceholder={false} />
 
-      <section style={{ paddingTop: '10px', paddingBottom: '10px' }}>
-        <Container>
-          <div className="grid lg:grid-cols-3" style={{ gap: '10px' }}>
-            <div className="rounded-[28px] border border-black/10 bg-slate-900 px-6 py-8 text-white">
-              <div className="text-xs uppercase tracking-[0.25em] text-white/60">
-                Преимущества
-              </div>
-              <div className="mt-3 font-display text-2xl">Честный сервис LUMO</div>
-              <p className="mt-3 text-sm text-white/70">
-                Проверка товара до отправки, реальная поддержка, бесшовный
-                возврат, бонусы за покупки.
-              </p>
-            </div>
-            <div className="rounded-[28px] border border-black/10 bg-white/80 px-6 py-8 text-slate-700">
-              <div className="font-semibold text-slate-900">Доставка и установка</div>
-              <p className="mt-2 text-sm text-slate-500">
-                Привезем в удобный слот, подключим крупную технику, вывезем
-                упаковку.
-              </p>
-            </div>
-            <div className="rounded-[28px] border border-black/10 bg-white/80 px-6 py-8 text-slate-700">
-              <div className="font-semibold text-slate-900">Гарантия и поддержка</div>
-              <p className="mt-2 text-sm text-slate-500">
-                14 дней на возврат, партнерские сервисы и расширенные гарантии.
-              </p>
-            </div>
-          </div>
-        </Container>
-      </section>
+      <CategoryProducts title="Холодильники" products={fridges} cardWidth={272} cardHeight={516} showPlaceholder={true} placeholderWidth={271} placeholderHeight={510} placeholderPosition="left" />
 
-      <section style={{ paddingTop: '10px', paddingBottom: '10px' }}>
-        <Container>
-          <div className="rounded-[32px] border border-black/10 bg-white/80 p-6">
-            <div className="font-display text-2xl text-slate-900">LUMO — реальный e-commerce</div>
-            <div style={{ marginTop: '10px', gap: '10px' }} className="grid text-sm text-slate-600 md:grid-cols-2">
-              <p>
-                Проект строится по принципам коммерческих платформ: быстрый
-                каталог, надежные карточки товара, честные условия и внимание к
-                мобильному UX.
-              </p>
-              <p>
-                Основной приоритет — удобство клиента: минимум шагов до покупки,
-                предсказуемая логистика и понятная архитектура интерфейсов.
-              </p>
-            </div>
-          </div>
-        </Container>
-      </section>
+      <CategoryProducts title="Ноутбуки" products={laptops} cardWidth={272} cardHeight={516} showPlaceholder={true} placeholderWidth={271} placeholderHeight={510} />
+
+      <VideoReviews />
+
+      <QrCodeSection />
+
+      <ServicesSection />
+
+      <Footer />
+
+      <Categories />
+
+      <Copyright />
     </div>
-  );
-}
-
-function SectionHeader({ title, subtitle }: { title: string; subtitle: string }) {
-  return (
-    <div className="flex flex-col md:flex-row md:items-end md:justify-between" style={{ gap: '10px' }}>
-      <div>
-        <h2 className="font-display text-2xl text-slate-900">{title}</h2>
-        <p className="text-sm text-slate-500">{subtitle}</p>
-      </div>
-      <Link href="/catalog" className="text-sm font-semibold text-slate-600 hover:text-slate-900">
-        Смотреть все →
-      </Link>
-    </div>
-  );
-}
-
-function ProductCard({
-  name,
-  category,
-  price,
-  badge,
-}: {
-  name: string;
-  category: string;
-  price: string;
-  badge: string;
-}) {
-  return (
-    <article className="rounded-[28px] border border-black/10 bg-white/80 p-5 shadow-sm shadow-black/5">
-      <div className="flex items-center justify-between text-xs">
-        <span className="rounded-full bg-slate-900 px-3 py-1 text-white">{badge}</span>
-        <span className="text-slate-400">{category}</span>
-      </div>
-      <div className="mt-5 h-36 rounded-2xl bg-gradient-to-br from-slate-100 via-white to-amber-100/70" />
-      <div className="mt-4 space-y-1">
-        <div className="font-semibold text-slate-900">{name}</div>
-        <div className="text-sm text-slate-500">от {price} ₽</div>
-      </div>
-      <button className="mt-4 w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5 hover:border-black/20">
-        В корзину
-      </button>
-    </article>
   );
 }

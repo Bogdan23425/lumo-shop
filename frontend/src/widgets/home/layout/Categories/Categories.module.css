@@ -1,0 +1,57 @@
+.categoriesSection {
+  width: 100%;
+}
+
+.categoriesContainer {
+  width: 1366px;
+  height: 186px;
+  margin: 0 auto;
+  padding: 24px 0;
+  box-sizing: border-box;
+  display: flex;
+  gap: 1px;
+}
+
+.categoriesTitleContainer {
+  width: 78px;
+  height: 138px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.categoriesTitle {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+  margin: 0;
+  padding: 0;
+}
+
+.categoriesPillsContainer {
+  width: 1287px;
+  height: 138px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.categoriesPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+}
+
+.categoryPill {
+  display: inline-block;
+  height: 38px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #f5f5f5;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+  line-height: 22px;
+  box-sizing: border-box;
+}
