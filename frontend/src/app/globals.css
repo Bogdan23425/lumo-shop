@@ -19,11 +19,19 @@
 }
 
 @layer base {
+  html {
+    overflow-x: hidden;
+    transform: none !important;
+  }
+
   body {
     background: var(--lumo-cream);
     color: var(--lumo-ink);
     font-family: var(--font-sans), system-ui, sans-serif;
     min-height: 100vh;
+    overflow-x: hidden;
+    transform: none !important;
+    position: relative !important;
   }
 
   .font-display {

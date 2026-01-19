@@ -1,122 +1,135 @@
-import type { ReactNode } from "react";
-import Link from "next/link";
-import { Container } from "@/shared/ui/Container";
-import { siteConfig } from "@/shared/config/site";
+"use client";
 
-function IconButton({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <button
-      className="group relative grid h-11 w-11 place-items-center rounded-full border border-black/10 bg-white/70 text-slate-900 shadow-sm shadow-black/5 transition hover:-translate-y-0.5 hover:border-black/20 hover:bg-white"
-      aria-label={label}
-    >
-      {children}
-      <span className="absolute -bottom-6 left-1/2 hidden -translate-x-1/2 text-[11px] text-slate-600 group-hover:block">
-        {label}
-      </span>
-    </button>
-  );
-}
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import {
+  FiGrid,
+  FiSearch,
+  FiUser,
+  FiShuffle,
+  FiHeart,
+  FiMessageCircle,
+  FiShoppingCart,
+  FiPhoneCall,
+} from "react-icons/fi";
+import { siteConfig } from "@/shared/config/site";
+import styles from "./Header.module.css";
 
 export function Header() {
+  const [showTop, setShowTop] = useState(true);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setShowTop(window.scrollY < 16);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-40 border-b border-black/5 bg-white">
-      <Container>
-        <div className="flex items-center justify-between gap-4 py-4">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="leading-none">
-              <div className="font-display text-xl font-semibold tracking-[0.2em] text-slate-900">
-                {siteConfig.name}
-              </div>
-              <div className="text-xs text-slate-500">{siteConfig.tagline}</div>
+    <header className={styles.header}>
+      <div className={styles.topSection} data-visible={showTop}>
+        <div className="flex h-[35px] items-end justify-between px-4 pb-1 text-xs text-[#616161]">
+          <div className="flex items-center gap-4">
+            <button className={`${styles.topLink} font-semibold text-slate-900`}>RU</button>
+            <button className={`${styles.topLink} text-slate-500`}>EN</button>
+            <span className={styles.topLink}>Киев</span>
+          </div>
+          <div className="hidden items-center gap-4 lg:flex">
+            <div className="flex items-center gap-4 font-semibold text-[#616161]">
+              <button className={styles.topLink}>Акции</button>
+              <button className={styles.topLink}>Подарочные карты</button>
+              <button className={styles.topLink}>Магазины</button>
+              <button className={styles.topLink}>Доставка</button>
+              <button className={styles.topLink}>Возврат</button>
+              <button className={styles.topLink}>Trade-In</button>
+              <button className={styles.topLink}>LUMO помогает</button>
             </div>
-          </Link>
-          <div className="hidden flex-1 px-6 lg:block">
-            <label className="relative block">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path
-                    d="M21 21L16.65 16.65M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </span>
+            <span className={`${styles.topLink} flex items-center gap-2 font-semibold text-[#D32F2F]`}>
+              <FiPhoneCall size={14} aria-hidden="true" />
+              Связаться
+            </span>
+          </div>
+        </div>
+      </div>
+
+        <div className="flex h-[68px] items-center gap-4 px-4 py-3">
+          <div className="flex items-center gap-4">
+            <div className="flex h-[36px] w-[147px] items-center justify-center rounded-lg bg-white text-lg font-semibold tracking-[0.2em] text-slate-900">
+              {siteConfig.name}
+            </div>
+            <button className="flex h-11 w-[144px] items-center justify-center gap-2 rounded-lg bg-[#44B02B] px-1.5 text-base font-semibold text-white transition-colors duration-200 ease-out hover:bg-[#379424]">
+              <FiGrid size={20} aria-hidden="true" />
+              Каталог
+            </button>
+          </div>
+
+          <div className="hidden flex-1 items-center gap-4 lg:flex">
+            <div className="flex flex-1">
               <input
-                className="w-full rounded-full border border-black/10 bg-white/80 py-3 pl-11 pr-4 text-sm text-slate-900 shadow-sm shadow-black/5 outline-none transition focus:border-black/30 focus:bg-white"
+                className="h-11 w-full rounded-l-md border border-[#44B02B] bg-white pl-4 pr-4 text-sm text-slate-900 shadow-sm shadow-black/5 outline-none"
                 placeholder="Поиск по каталогу, брендам и моделям"
                 type="search"
               />
-            </label>
+              <button className="flex h-11 w-[120px] items-center justify-center gap-2 rounded-r-md bg-[#44B02B] px-4 text-base font-semibold text-white transition-colors duration-200 ease-out hover:bg-[#379424]">
+                Найти
+                <FiSearch aria-hidden="true" style={{ width: 18, height: 16 }} />
+              </button>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <IconButton label="Профиль">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path
-                  d="M20 21C20 17.134 16.866 14 13 14H11C7.13401 14 4 17.134 4 21"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M12 10C14.2091 10 16 8.20914 16 6C16 3.79086 14.2091 2 12 2C9.79086 2 8 3.79086 8 6C8 8.20914 9.79086 10 12 10Z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                />
-              </svg>
-            </IconButton>
-            <IconButton label="Избранное">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path
-                  d="M12 20L4.5 12.5C2.5 10.5 2.5 7.5 4.5 5.5C6.5 3.5 9.5 3.5 11.5 5.5L12 6L12.5 5.5C14.5 3.5 17.5 3.5 19.5 5.5C21.5 7.5 21.5 10.5 19.5 12.5L12 20Z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </IconButton>
-            <IconButton label="Корзина">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path
-                  d="M6 6H4M6 6H20L18 14H7L6 6Z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M9 20C9.55228 20 10 19.5523 10 19C10 18.4477 9.55228 18 9 18C8.44772 18 8 18.4477 8 19C8 19.5523 8.44772 20 9 20Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M17 20C17.5523 20 18 19.5523 18 19C18 18.4477 17.5523 18 17 18C16.4477 18 16 18.4477 16 19C16 19.5523 16.4477 20 17 20Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </IconButton>
+
+          <div className="flex items-center gap-4 text-slate-700">
+            <div className="hidden h-11 w-[331.77px] items-center justify-between lg:flex">
+              <button className="group flex h-11 w-[65px] items-center justify-center rounded-md bg-white text-[12px] font-semibold text-[#616161] transition-colors duration-200 ease-out">
+                <span className="flex flex-col items-center gap-0.5 text-[#616161] transition-colors duration-200 ease-out group-hover:text-[#44B02B]">
+                  <FiUser size={20} aria-hidden="true" />
+                  Увійти
+                </span>
+              </button>
+              <button className="group flex h-11 w-[68.52px] items-center justify-center rounded-md bg-white text-[12px] font-semibold text-[#616161] transition-colors duration-200 ease-out">
+                <span className="flex flex-col items-center gap-0.5 text-[#616161] transition-colors duration-200 ease-out group-hover:text-[#44B02B]">
+                  <FiShuffle size={20} aria-hidden="true" />
+                  Порівняння
+                </span>
+              </button>
+              <button className="group flex h-11 w-[65px] items-center justify-center rounded-md bg-white text-[12px] font-semibold text-[#616161] transition-colors duration-200 ease-out">
+                <span className="flex flex-col items-center gap-0.5 text-[#616161] transition-colors duration-200 ease-out group-hover:text-[#44B02B]">
+                  <FiHeart size={20} aria-hidden="true" />
+                  Обране
+                </span>
+              </button>
+              <button className="group flex h-11 w-[85.22px] items-center justify-center rounded-md bg-white text-[12px] font-semibold text-[#616161] transition-colors duration-200 ease-out">
+                <span className="flex flex-col items-center gap-0.5 text-[#616161] transition-colors duration-200 ease-out group-hover:text-[#44B02B]">
+                  <FiMessageCircle size={20} aria-hidden="true" />
+                  Повідомлення
+                </span>
+              </button>
+            </div>
+            <button className="group flex h-11 w-[125px] items-center justify-center gap-2 rounded-lg bg-[#F2F2F2] text-sm font-semibold text-slate-900 transition-colors duration-200 ease-out hover:bg-[#E5E5E5]">
+              <FiShoppingCart className="transition-colors duration-200 ease-out group-hover:text-[#44B02B]" size={20} aria-hidden="true" />
+              <span className="transition-colors duration-200 ease-out group-hover:text-[#44B02B]">
+                Корзина
+              </span>
+            </button>
           </div>
         </div>
-        <div className="pb-4 lg:hidden">
-          <label className="relative block">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path
-                  d="M21 21L16.65 16.65M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>
+
+      <div className="border-t border-black/5 px-4 pb-4 pt-2 lg:hidden">
+        <div className="flex items-center gap-4">
+          <label className="relative block flex-1">
             <input
-              className="w-full rounded-2xl border border-black/10 bg-white/80 py-3 pl-11 pr-4 text-sm text-slate-900 shadow-sm shadow-black/5 outline-none transition focus:border-black/30 focus:bg-white"
+              className="h-11 w-full rounded-lg border border-[#44B02B] bg-white pl-4 pr-4 text-sm text-slate-900 shadow-sm shadow-black/5 outline-none"
               placeholder="Поиск в LUMO"
               type="search"
             />
           </label>
+          <button className="flex h-11 w-[112px] items-center justify-center gap-2 rounded-lg bg-[#44B02B] text-base font-semibold text-white transition-colors duration-200 ease-out hover:bg-[#379424]">
+            Найти
+            <FiSearch aria-hidden="true" style={{ width: 18, height: 16 }} />
+          </button>
         </div>
-      </Container>
+      </div>
     </header>
   );
 }
